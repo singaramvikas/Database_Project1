@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="checkouts" Relationship="Database1Model.FK_checkout_US" FromRole="user" ToRole="checkout" />
+    <NavigationProperty Name="address" Relationship="Database1Model.FK_address_T" FromRole="user" ToRole="address" />
+  </EntityType>
+  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="books" EntityType="Database1Model.book" />
+    <EntitySet Name="checkouts" EntityType="Database1Model.checkout" />
+    <AssociationSet Name="FK_checkout_BI" Association="Database1Model.FK_checkout_BI">
+      <End Role="book" EntitySet="books" />
+      <End Role="checkout" EntitySet="checkouts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_checkout_US" Association="Database1Model.FK_checkout_US">
+      <End Role="user" EntitySet="users" />
+      <End Role="checkout" EntitySet="checkouts" />
+    </AssociationSet>
+    <EntitySet Name="addresses" EntityType="Database1Model.address" />
+    <AssociationSet Name="FK_address_T" Association="Database1Model.FK_address_T">
+      <End Role="user" EntitySet="users" />
+      <End Role="address" EntitySet="addresses" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="book">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="published_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="checkouts" Relationship="Database1Model.FK_checkout_BI" FromRole="book" ToRole="checkout" />
+  </EntityType>
+  <EntityType Name="checkout">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="user_id" Type="Int32" Nullable="false" />
+    <Property Name="book_id" Type="Int32" Nullable="false" />
+    <Property Name="checkout_date" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="return_date" Type="DateTime" Precision="0" Nullable="false" />
+    <NavigationProperty Name="book" Relationship="Database1Model.FK_checkout_BI" FromRole="checkout" ToRole="book" />
+    <NavigationProperty Name="user" Relationship="Database1Model.FK_checkout_US" FromRole="checkout" ToRole="user" />
+  </EntityType>
+  <Association Name="FK_checkout_BI">
+    <End Type="Database1Model.book" Role="book" Multiplicity="1" />
+    <End Type="Database1Model.checkout" Role="checkout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="book">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="checkout">
+        <PropertyRef Name="book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_checkout_US">
+    <End Type="Database1Model.user" Role="user" Multiplicity="1" />
+    <End Type="Database1Model.checkout" Role="checkout" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="checkout">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="address">
+    <Key>
+      <PropertyRef Name="user_Id" />
+    </Key>
+    <Property Name="user_Id" Type="Int32" Nullable="false" />
+    <Property Name="street" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="zipcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="user" Relationship="Database1Model.FK_address_T" FromRole="address" ToRole="user" />
+  </EntityType>
+  <Association Name="FK_address_T">
+    <End Type="Database1Model.user" Role="user" Multiplicity="1" />
+    <End Type="Database1Model.address" Role="address" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="address">
+        <PropertyRef Name="user_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
