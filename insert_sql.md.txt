@@ -1,0 +1,36 @@
+INSERT INTO users(ID , FirstName, LastName , emailId, PhoneNumber)
+VALUES
+(1, 'James' , 'Anderson' , 'Jand@gmail.com' , '999988887'),
+(2, 'Rose', 'Raymonds', 'RR@yahoo.com', '9866578237'),
+(3, 'Kevin','Weiss','kevin@test.com','123.12312'),
+(4, 'Lex','De Haan','lex@test.com','123.12313),
+(5, 'Laura','Bissot','laura@test.com','12312315');
+
+
+INSERT INTO Address(user_ID , street, city, State, Zipcode)
+VALUES
+(1, '21st', 'Wichita', 'Kansas',  '62201'),
+(2, '19St', 'Wichita', 'Kansas',  '63501'),
+(3, '6649 N Blue Gum St', 'New Orleans', '70116'),
+(4, 'B Blue Ridge Blvd', 'Brighton', '48116'),
+(5, 'Main St', 'Anchorage', '99501');
+
+
+INSERT INTO books(ID , title, Author, PublishedDate)
+VALUES
+(1, 'Harry Potter', 'Jk Rowling' , '12/04/2000'),
+(2, 'Atomic Habits', 'James Clear', '05/05/2008'),
+(3, 'War and Peace', 'Tolstoy', '05/15/1865'),
+(4, 'Tom Sawyer', 'Twain', '08/15/1862'),
+(5, 'The Hours', 'Cunnningham', '07/20/1999');
+
+INSERT INTO Checkout(ID ,user_ID , book_id , checkout_date, Return_date)
+VALUES
+(1, 1, 1, '12/12/2021' , '01/12/2022'),
+(2, 2, 2, '12/12/2021' , '01/12/2022'),
+(3, 3, 3, '12/12/2021' , '01/12/2022'),
+(4, 4, 4, '12/12/2021' , '01/12/2022'),
+(5, 5, 5, '12/12/2021' , '01/12/2022');
+
+
+

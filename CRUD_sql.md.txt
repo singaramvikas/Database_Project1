@@ -1,0 +1,32 @@
+CRUD Operations on ALL the tables 
+
+Create Operation is placed in insert_sql.md files to create rows for the all the table ;
+
+
+Read Operation:
+
+SELECT * FROM users;
+SELECT * FROM address;
+SELECT * FROM book;
+SELECT * FROM checkout;
+
+
+Update Operation:
+
+UPDATE table_name
+SET column1 = value1, column2 = value2
+WHERE condition;
+
+ALTER table_name
+ADD COLUMN column_name data_type;
+
+
+
+Delete Operation:
+
+DELETE FROM Users;
+
+DELETE col_name emailId;
+
+DROP table_users;
+

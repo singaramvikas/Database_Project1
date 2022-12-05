@@ -1,0 +1,57 @@
+Database booksDb Description:
+
+BookdDb is a sample model for a Library ,Which consisting of 4 Relational database tables : Users,Address,Books,Checkout
+
+Table Description:
+
+Users: Primary attributes are ID (Primary Key), FirstName, LastName , emailId, PhoneNumber
+
+sample data :
+
+1, James , Anderson , Jand@gmail.com , +1999988887
+2, Rose, Raymonds, RR@yahoo.com, +919866578237
+
+FDS :  FirstName, LastName , emailId, PhoneNumber are dependent on ID 
+
+Address: Primary attributes are user_ID (primary key) (foriegn key refrence to Users table ), street, city, State, Zipcode.
+
+sampledata:
+
+1, 21st, Wichita, Kansas,  62201
+2, 19St, Wichita, Kansas,  63501
+
+FDS: street, city, State, Zipcode these attributes are dependent on user_id
+
+Book: Primary attributes are ID (primary key), title, Author, PublishedDate 
+
+sample Data :
+
+1, Harry Potter, Jk Rowling , 12/04/1998
+2, Atomic Habits, James Clear, 05/05/2008
+
+
+Checkout: Primary attributes are ID (primary Key),user_ID (foriegn key refrence to User Table), book_id (foriegn key refrence to book table), checkout_date, Return_date.
+
+sample Data : 
+
+1, 1, 1, 12/12/2021 , 01/12/2022
+2, 2, 2, 12/12/2021 , 01/12/2022 
+
+All Tables are in 3rd Normal Form 
+
+Execution of this data model is done by using ASP.NET(web framework)MVU mechanisam by creating models and controllers for each table.
+
+
+The purpose of our SQL Book app is to allow users to use books about SQL, so in this context we can think of books as an entity within our system.
+One of the things our users can do is to checkout books, so we could have a third entity called checkouts that exists between users and books.
+we want to store address information for each user. Since this address data will only be used occasionally and not for every user interaction, we decide to store it in a separate table. We could potentially still think of this address data as part of the 'users' entity, but for now let's think of it as a separate entity called addresses
+
+A User can have ONE address. An address has only ONE user (one to one relation)
+A User can have MANY books that he/she may have checked out or returned. A Book can be/ have been checked out by MANY users (Many to many relation)
+
+Constraints:
+
+As with one-to-many relationships, the foreign keys in many-to-many relationships should not allow NULL entries. Thus, both user_id and book_id have the NOT NULL constraint
+
+
+
